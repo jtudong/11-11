@@ -1,11 +1,11 @@
-=~=~=~=~=~=~=~=~=~=~=~= KiTTY log 2026.09.22 12:58:51 =~=~=~=~=~=~=~=~=~=~=~=
+=~=~=~=~=~=~=~=~=~=~=~= KiTTY log 2026.09.22 14:34:08 =~=~=~=~=~=~=~=~=~=~=~=
 
-NXOS# term len 0
+NXOS# terlm len 0
 NXOS# sh run
 
 !Command: show running-config
-!Running configuration last done at: Tue Sep 22 18:25:05 2026
-!Time: Tue Sep 22 19:54:32 2026
+!Running configuration last done at: Tue Sep 22 20:31:36 2026
+!Time: Tue Sep 22 21:29:28 2026
 
 version 10.5(2) Bios:version  
 hostname NXOS
@@ -37,6 +37,7 @@ rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
 vlan 1,252
 vlan 252
   name Server-VLAN
+  vn-segment 10252
 
 spanning-tree vlan 252 priority 0
 vrf context management
@@ -61,6 +62,13 @@ interface Vlan252
     preempt 
     priority 110 forwarding-threshold lower 1 upper 110
     ip 172.16.252.1
+
+interface nve1
+  no shutdown
+  source-interface loopback999
+  member vni 10252
+    ingress-replication protocol static
+      peer-ip 10.252.250.3
 
 interface Ethernet1/1
 
