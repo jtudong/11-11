@@ -1,0 +1,153 @@
+=~=~=~=~=~=~=~=~=~=~=~= KiTTY log 2026.09.29 14:36:40 =~=~=~=~=~=~=~=~=~=~=~=
+
+peer#term len 0
+peer#sh run
+Building configuration...
+
+Current configuration : 1677 bytes
+!
+! Last configuration change at 14:20:34 MST Tue Sep 29 2026
+! NVRAM config last updated at 14:21:03 MST Tue Sep 29 2026
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname peer
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+clock timezone MST -7 0
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip domain name shamrock.lab
+ip name-server 208.67.222.222
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+no cdp log mismatch duplex
+!
+ip tcp synwait-time 5
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address dhcp
+ ip nat outside
+ ip virtual-reassembly in
+ duplex auto
+!
+interface Ethernet0/1
+ ip address 100.127.0.1 255.255.255.252
+ ip nat inside
+ ip virtual-reassembly in
+ duplex auto
+!
+interface Ethernet0/2
+ no ip address
+ duplex auto
+!
+interface Ethernet0/3
+ no ip address
+ duplex auto
+!
+router bgp 65001
+ bgp log-neighbor-changes
+ neighbor 100.127.0.2 remote-as 14127
+ neighbor 100.127.0.2 default-originate
+ neighbor 100.127.0.2 soft-reconfiguration inbound
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip nat inside source list 10 interface Ethernet0/0 overload
+!
+ipv6 ioam timestamp
+!
+!
+access-list 10 permit any
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ transport preferred none
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+ transport input none
+!
+ntp server time.google.com
+!
+end
+
+peer#
