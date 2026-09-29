@@ -1,0 +1,147 @@
+=~=~=~=~=~=~=~=~=~=~=~= KiTTY log 2026.09.29 14:38:50 =~=~=~=~=~=~=~=~=~=~=~=
+
+1111-R1#term len 0
+1111-R1#sh run
+Building configuration...
+
+Current configuration : 1507 bytes
+!
+! Last configuration change at 14:27:58 MST Tue Sep 29 2026
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname 1111-R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+clock timezone MST -7 0
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip domain name shamrock.lab
+ip name-server 208.67.222.222
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+redundancy
+!
+no cdp log mismatch duplex
+!
+ip tcp synwait-time 5
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 100.127.0.2 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/1
+ ip address 161.129.81.49 255.255.255.240
+ duplex auto
+!
+interface Ethernet0/2
+ no ip address
+ duplex auto
+!
+interface Ethernet0/3
+ no ip address
+ duplex auto
+!
+router bgp 14127
+ bgp router-id 100.127.0.2
+ bgp log-neighbor-changes
+ network 161.129.81.48 mask 255.255.255.240
+ neighbor 100.127.0.1 remote-as 65001
+ neighbor 100.127.0.1 soft-reconfiguration inbound
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ transport preferred none
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ login
+ transport input none
+!
+ntp server time.google.com
+!
+end
+
+1111-R1#
