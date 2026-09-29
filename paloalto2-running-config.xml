@@ -1,0 +1,712 @@
+<?xml version="1.0"?>
+<config version="11.1.0" urldb="paloaltonetworks" detail-version="11.1.13">
+  <mgt-config>
+    <users>
+      <entry name="admin">
+        <phash>$5$wpqrngon$bkDHWlbIrlMhvhSd4NQpD3cEQmrKVsKuAW9ojFef587</phash>
+        <permissions>
+          <role-based>
+            <superuser>yes</superuser>
+          </role-based>
+        </permissions>
+      </entry>
+      <entry name="__openconfig">
+        <phash>$5$heekxrfg$Rrv.OczE.XTp1is1xzSB5UCJcqAWmMor996AsEot92/</phash>
+        <permissions>
+          <role-based>
+            <deviceadmin>
+              <member>localhost.localdomain</member>
+            </deviceadmin>
+          </role-based>
+        </permissions>
+      </entry>
+      <entry name="__telemetryuser">
+        <phash>$5$buybsqxf$L/UQob3IhhrL5rTY52k6zC.LosaWw1kwpcD0giIV8P5</phash>
+        <permissions>
+          <role-based>
+            <deviceadmin>
+              <member>localhost.localdomain</member>
+            </deviceadmin>
+          </role-based>
+        </permissions>
+      </entry>
+      <entry name="lab">
+        <permissions>
+          <role-based>
+            <superuser>yes</superuser>
+          </role-based>
+        </permissions>
+        <phash>$5$lsukluin$VCA2vzfLlliMjSbejYzPriC0Q96xDQHzmkJy1D.YOv.</phash>
+      </entry>
+    </users>
+    <password-complexity>
+      <enabled>yes</enabled>
+      <minimum-length>3</minimum-length>
+    </password-complexity>
+  </mgt-config>
+  <shared>
+    <application/>
+    <application-group/>
+    <service/>
+    <service-group/>
+    <botnet>
+      <configuration>
+        <http>
+          <dynamic-dns>
+            <enabled>yes</enabled>
+            <threshold>5</threshold>
+          </dynamic-dns>
+          <malware-sites>
+            <enabled>yes</enabled>
+            <threshold>5</threshold>
+          </malware-sites>
+          <recent-domains>
+            <enabled>yes</enabled>
+            <threshold>5</threshold>
+          </recent-domains>
+          <ip-domains>
+            <enabled>yes</enabled>
+            <threshold>10</threshold>
+          </ip-domains>
+          <executables-from-unknown-sites>
+            <enabled>yes</enabled>
+            <threshold>5</threshold>
+          </executables-from-unknown-sites>
+        </http>
+        <other-applications>
+          <irc>yes</irc>
+        </other-applications>
+        <unknown-applications>
+          <unknown-tcp>
+            <destinations-per-hour>10</destinations-per-hour>
+            <sessions-per-hour>10</sessions-per-hour>
+            <session-length>
+              <maximum-bytes>100</maximum-bytes>
+              <minimum-bytes>50</minimum-bytes>
+            </session-length>
+          </unknown-tcp>
+          <unknown-udp>
+            <destinations-per-hour>10</destinations-per-hour>
+            <sessions-per-hour>10</sessions-per-hour>
+            <session-length>
+              <maximum-bytes>100</maximum-bytes>
+              <minimum-bytes>50</minimum-bytes>
+            </session-length>
+          </unknown-udp>
+        </unknown-applications>
+      </configuration>
+      <report>
+        <topn>100</topn>
+        <scheduled>yes</scheduled>
+      </report>
+    </botnet>
+    <certificate>
+      <entry name="selfsignedca">
+        <subject-hash>b52c7a57</subject-hash>
+        <issuer-hash>b52c7a57</issuer-hash>
+        <not-valid-before>Sep 23 17:10:16 2026 GMT</not-valid-before>
+        <issuer>/CN=selfsignedca</issuer>
+        <not-valid-after>Sep 23 17:10:16 2027 GMT</not-valid-after>
+        <common-name>selfsignedca</common-name>
+        <expiry-epoch>1821719416</expiry-epoch>
+        <ca>yes</ca>
+        <subject>/CN=selfsignedca</subject>
+        <public-key>-----BEGIN CERTIFICATE-----
+MIIFITCCAwmgAwIBAgIUe7HEa0Pn786vdNxc3AtswB0EDlgwDQYJKoZIhvcNAQEL
+BQAwFzEVMBMGA1UEAwwMc2VsZnNpZ25lZGNhMB4XDTI2MDkyMzE3MTAxNloXDTI3
+MDkyMzE3MTAxNlowFzEVMBMGA1UEAwwMc2VsZnNpZ25lZGNhMIICIjANBgkqhkiG
+9w0BAQEFAAOCAg8AMIICCgKCAgEAv1UB8yipc2slReT2YeHMvSMiiwwnDw3KYwZ4
+yAAi/rRra2FOqUJfx4rUuk+PwDJpy+i8Ju0vjcL0mAVucGo3ZdIPyK7U+j5HJbyX
+KjiyTwYuwD4rj7LivfhnhNGNwDGV6M+1rjP6U1lWpFeRmGp+NDqCHSZnwfiqjCAE
+YzFfF5iGtN3GybOH0KoBV8eLHqzIQFsEiNjrUFJkB4TjBxbeC6FpZjcuJBAXl8z/
+tAUx3Ck7egyjinhfF14UmKOI4tIBbRs6bqQVssjp5AhdM4BthEylsLA0W1V6+Bhy
+FbGHd6UuvHS3UWSBta94trkixXd5HygvVw1jCxbpBW5cnKbw1RQ0N6sFiwygESCk
+aZVdUyGwn9i4WxMr2rf+w8qpE8hUk5NX9cdH3qWw/h9o7EP0ZOF8emz4RyprUwFD
+EnVfeKKqb8j35/kbtFLY7E+H3Aj3JdzcrgqVxKxWU/naeX0EEiSu+vJ0WuxWC+Zd
+XIDOh7O5kb14JjQWw2vTc7Cz51ex43MGPIzm0dKhEjcuo4/THmOGZS7N2nFmPvED
+FGtMuEKS4q2Kl4VJnf40AFjjNo+mN0Srul73qYc3HWQs/ZZMqLZize8ZuGe0VQ51
+b/Cz3TwdEt8+vb30NYO/TNtRQGo7xP2VmMe3SvLI2UDCW1h3kWX9KJiVuCScR3EE
+rzlLsPMCAwEAAaNlMGMwDAYDVR0TBAUwAwEB/zALBgNVHQ8EBAMCAgQwHQYDVR0O
+BBYEFPJoAlgCFcSyBOmg2Tdmj+S0OC17MCcGA1UdJQQgMB4GCCsGAQUFBwMBBggr
+BgEFBQcDAgYIKwYBBQUHAwkwDQYJKoZIhvcNAQELBQADggIBABAwKd/7Wqg+pzev
++AkCd/C+6OD3qVPUs+oSM1NUeT/pfRf026HC3ovOX1eraY8yBN6CkaGRyLFI5ExD
+U5Y6623ClqmeKgSznMzyWVq0FBZGFPlK0OEUJgf4+7BzRIFBXno2k2p8cZ1CGEst
+0ylyrc030vLMPfS+579H5h6hVMQyUPN+c+cwfbV0soHbDf2IirgPvuKcSezFhFrU
+zwG+BJZvFMs7bb98TP6/czmqCeyZVlx3ABsTtktZIhLXZsHb5SI9oARkUdZHROI1
+bC3t4sH4OmS2sEpyBZfbUkHBuhV8KEAFTNnxPfwlA2DblYnPzelelFL5cMK2V+AM
+MxWgYh7IfyjMWIBl5n71d0E/2x4QWlC7iAZEw52WKI7MzuC8aAa6hoqGMoUXBLcs
+mmZUd0qdLwqHzAbEiP5oxMKbEcsjncImJ15ysu4MMAuQttw0B28EO8xgjjHZPYhu
+7o93FcF9FV9QvZ+81ePDUnd0UEgRMkZizU+GNrHCl2vCwytfN3dqxUHFDw25s+I3
+8HHZqDjwKvbijaQz9QvP35Ogz/qJJefFF7dTFj7Pch7Ln4X3hMCv+cs8WeyA7oap
+04VDGcLu4AbV0TkcsAeAn73DtSgclVITcS6/+9H0FXY216SLT+yqIs2fIF0jvBDH
+lRIvNwwDX1T1ksIcTCuhEoMx2ZTZ
+-----END CERTIFICATE-----
+</public-key>
+        <algorithm>RSA</algorithm>
+        <private-key>-AQ==w4pVuc8JoCIx8gp1Nq+bUJ7gteg=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</private-key>
+      </entry>
+    </certificate>
+    <certificate-profile/>
+  </shared>
+  <devices>
+    <entry name="localhost.localdomain">
+      <network>
+        <interface>
+          <ethernet>
+            <entry name="ethernet1/1">
+              <layer3>
+                <ndp-proxy>
+                  <enabled>no</enabled>
+                </ndp-proxy>
+                <sdwan-link-settings>
+                  <upstream-nat>
+                    <enable>no</enable>
+                    <static-ip/>
+                  </upstream-nat>
+                  <enable>no</enable>
+                  <ipv6-enable>no</ipv6-enable>
+                </sdwan-link-settings>
+                <ip>
+                  <entry name="10.252.253.1/24"/>
+                </ip>
+                <interface-management-profile>Inside-Trust</interface-management-profile>
+                <lldp>
+                  <enable>no</enable>
+                </lldp>
+              </layer3>
+              <comment>management inband gateway</comment>
+            </entry>
+            <entry name="ethernet1/3">
+              <layer3>
+                <ndp-proxy>
+                  <enabled>no</enabled>
+                </ndp-proxy>
+                <sdwan-link-settings>
+                  <upstream-nat>
+                    <enable>no</enable>
+                    <static-ip/>
+                  </upstream-nat>
+                  <enable>no</enable>
+                  <ipv6-enable>no</ipv6-enable>
+                </sdwan-link-settings>
+                <ip>
+                  <entry name="161.129.81.52/28"/>
+                </ip>
+                <interface-management-profile>Outside-MGMT</interface-management-profile>
+                <lldp>
+                  <enable>no</enable>
+                </lldp>
+              </layer3>
+              <comment>Internet transit</comment>
+            </entry>
+            <entry name="ethernet1/4">
+              <layer3>
+                <ndp-proxy>
+                  <enabled>no</enabled>
+                </ndp-proxy>
+                <sdwan-link-settings>
+                  <upstream-nat>
+                    <enable>no</enable>
+                    <static-ip/>
+                  </upstream-nat>
+                  <enable>no</enable>
+                  <ipv6-enable>no</ipv6-enable>
+                </sdwan-link-settings>
+                <ip>
+                  <entry name="10.252.255.1/24"/>
+                </ip>
+                <interface-management-profile>Inside-Trust</interface-management-profile>
+                <lldp>
+                  <enable>no</enable>
+                </lldp>
+              </layer3>
+              <comment>fw-rtr-transit</comment>
+            </entry>
+            <entry name="ethernet1/8">
+              <layer3>
+                <ndp-proxy>
+                  <enabled>no</enabled>
+                </ndp-proxy>
+                <sdwan-link-settings>
+                  <upstream-nat>
+                    <enable>no</enable>
+                    <static-ip/>
+                  </upstream-nat>
+                  <enable>no</enable>
+                  <ipv6-enable>no</ipv6-enable>
+                </sdwan-link-settings>
+                <dhcp-client>
+                  <send-hostname>
+                    <enable>yes</enable>
+                  </send-hostname>
+                </dhcp-client>
+                <interface-management-profile>Outside-MGMT</interface-management-profile>
+                <lldp>
+                  <enable>no</enable>
+                </lldp>
+              </layer3>
+            </entry>
+          </ethernet>
+        </interface>
+        <profiles>
+          <monitor-profile>
+            <entry name="default">
+              <interval>3</interval>
+              <threshold>5</threshold>
+              <action>wait-recover</action>
+            </entry>
+          </monitor-profile>
+          <interface-management-profile>
+            <entry name="Inside-Trust">
+              <https>yes</https>
+              <ssh>yes</ssh>
+              <ping>yes</ping>
+            </entry>
+            <entry name="Outside-MGMT">
+              <ping>yes</ping>
+              <https>yes</https>
+              <ssh>yes</ssh>
+            </entry>
+          </interface-management-profile>
+        </profiles>
+        <ike>
+          <crypto-profiles>
+            <ike-crypto-profiles>
+              <entry name="default">
+                <encryption>
+                  <member>aes-128-cbc</member>
+                  <member>3des</member>
+                </encryption>
+                <hash>
+                  <member>sha1</member>
+                </hash>
+                <dh-group>
+                  <member>group2</member>
+                </dh-group>
+                <lifetime>
+                  <hours>8</hours>
+                </lifetime>
+              </entry>
+              <entry name="Suite-B-GCM-128">
+                <encryption>
+                  <member>aes-128-cbc</member>
+                </encryption>
+                <hash>
+                  <member>sha256</member>
+                </hash>
+                <dh-group>
+                  <member>group19</member>
+                </dh-group>
+                <lifetime>
+                  <hours>8</hours>
+                </lifetime>
+              </entry>
+              <entry name="Suite-B-GCM-256">
+                <encryption>
+                  <member>aes-256-cbc</member>
+                </encryption>
+                <hash>
+                  <member>sha384</member>
+                </hash>
+                <dh-group>
+                  <member>group20</member>
+                </dh-group>
+                <lifetime>
+                  <hours>8</hours>
+                </lifetime>
+              </entry>
+            </ike-crypto-profiles>
+            <ipsec-crypto-profiles>
+              <entry name="default">
+                <esp>
+                  <encryption>
+                    <member>aes-128-cbc</member>
+                    <member>3des</member>
+                  </encryption>
+                  <authentication>
+                    <member>sha1</member>
+                  </authentication>
+                </esp>
+                <dh-group>group2</dh-group>
+                <lifetime>
+                  <hours>1</hours>
+                </lifetime>
+              </entry>
+              <entry name="Suite-B-GCM-128">
+                <esp>
+                  <encryption>
+                    <member>aes-128-gcm</member>
+                  </encryption>
+                  <authentication>
+                    <member>none</member>
+                  </authentication>
+                </esp>
+                <dh-group>group19</dh-group>
+                <lifetime>
+                  <hours>1</hours>
+                </lifetime>
+              </entry>
+              <entry name="Suite-B-GCM-256">
+                <esp>
+                  <encryption>
+                    <member>aes-256-gcm</member>
+                  </encryption>
+                  <authentication>
+                    <member>none</member>
+                  </authentication>
+                </esp>
+                <dh-group>group20</dh-group>
+                <lifetime>
+                  <hours>1</hours>
+                </lifetime>
+              </entry>
+            </ipsec-crypto-profiles>
+            <global-protect-app-crypto-profiles>
+              <entry name="default">
+                <encryption>
+                  <member>aes-128-cbc</member>
+                </encryption>
+                <authentication>
+                  <member>sha1</member>
+                </authentication>
+              </entry>
+            </global-protect-app-crypto-profiles>
+          </crypto-profiles>
+        </ike>
+        <qos>
+          <profile>
+            <entry name="default">
+              <class-bandwidth-type>
+                <mbps>
+                  <class>
+                    <entry name="class1">
+                      <priority>real-time</priority>
+                    </entry>
+                    <entry name="class2">
+                      <priority>high</priority>
+                    </entry>
+                    <entry name="class3">
+                      <priority>high</priority>
+                    </entry>
+                    <entry name="class4">
+                      <priority>medium</priority>
+                    </entry>
+                    <entry name="class5">
+                      <priority>medium</priority>
+                    </entry>
+                    <entry name="class6">
+                      <priority>low</priority>
+                    </entry>
+                    <entry name="class7">
+                      <priority>low</priority>
+                    </entry>
+                    <entry name="class8">
+                      <priority>low</priority>
+                    </entry>
+                  </class>
+                </mbps>
+              </class-bandwidth-type>
+            </entry>
+          </profile>
+        </qos>
+        <virtual-router>
+          <entry name="L3-Routes">
+            <ecmp>
+              <algorithm>
+                <ip-modulo/>
+              </algorithm>
+            </ecmp>
+            <protocol>
+              <bgp>
+                <routing-options>
+                  <graceful-restart>
+                    <enable>yes</enable>
+                  </graceful-restart>
+                </routing-options>
+                <enable>no</enable>
+              </bgp>
+              <rip>
+                <enable>no</enable>
+              </rip>
+              <ospf>
+                <enable>no</enable>
+              </ospf>
+              <ospfv3>
+                <enable>no</enable>
+              </ospfv3>
+            </protocol>
+            <interface>
+              <member>ethernet1/1</member>
+              <member>ethernet1/3</member>
+              <member>ethernet1/4</member>
+            </interface>
+            <routing-table>
+              <ip>
+                <static-route>
+                  <entry name="replication_network">
+                    <nexthop>
+                      <ip-address>10.252.255.10</ip-address>
+                    </nexthop>
+                    <bfd>
+                      <profile>None</profile>
+                    </bfd>
+                    <interface>ethernet1/4</interface>
+                    <metric>200</metric>
+                    <destination>10.252.252.0/24</destination>
+                    <route-table>
+                      <unicast/>
+                    </route-table>
+                  </entry>
+                  <entry name="AZFOODS 172-X-X-X OTV">
+                    <nexthop>
+                      <ip-address>10.252.255.10</ip-address>
+                    </nexthop>
+                    <bfd>
+                      <profile>None</profile>
+                    </bfd>
+                    <interface>ethernet1/4</interface>
+                    <metric>10</metric>
+                    <destination>172.16.0.0/12</destination>
+                    <route-table>
+                      <unicast/>
+                    </route-table>
+                  </entry>
+                  <entry name="AZFOODS 10-X-X-X OTV">
+                    <path-monitor>
+                      <monitor-destinations>
+                        <entry name="OTV">
+                          <enable>yes</enable>
+                          <source>10.252.255.1/24</source>
+                          <destination>10.252.255.10</destination>
+                          <interval>3</interval>
+                          <count>5</count>
+                        </entry>
+                      </monitor-destinations>
+                      <enable>yes</enable>
+                      <failure-condition>any</failure-condition>
+                      <hold-time>2</hold-time>
+                    </path-monitor>
+                    <nexthop>
+                      <ip-address>10.252.255.10</ip-address>
+                    </nexthop>
+                    <bfd>
+                      <profile>None</profile>
+                    </bfd>
+                    <interface>ethernet1/4</interface>
+                    <metric>10</metric>
+                    <destination>10.0.0.0/8</destination>
+                    <route-table>
+                      <unicast/>
+                    </route-table>
+                  </entry>
+                  <entry name="Default">
+                    <nexthop>
+                      <ip-address>161.129.81.49</ip-address>
+                    </nexthop>
+                    <bfd>
+                      <profile>None</profile>
+                    </bfd>
+                    <interface>ethernet1/3</interface>
+                    <metric>200</metric>
+                    <destination>0.0.0.0/0</destination>
+                    <route-table>
+                      <unicast/>
+                    </route-table>
+                  </entry>
+                </static-route>
+              </ip>
+            </routing-table>
+          </entry>
+          <entry name="mgmt">
+            <ecmp>
+              <algorithm>
+                <ip-modulo/>
+              </algorithm>
+            </ecmp>
+            <protocol>
+              <bgp>
+                <routing-options>
+                  <graceful-restart>
+                    <enable>yes</enable>
+                  </graceful-restart>
+                </routing-options>
+                <enable>no</enable>
+              </bgp>
+              <rip>
+                <enable>no</enable>
+              </rip>
+              <ospf>
+                <enable>no</enable>
+              </ospf>
+              <ospfv3>
+                <enable>no</enable>
+              </ospfv3>
+            </protocol>
+            <interface>
+              <member>ethernet1/8</member>
+            </interface>
+          </entry>
+        </virtual-router>
+      </network>
+      <deviceconfig>
+        <system>
+          <type>
+            <static/>
+          </type>
+          <update-server>updates.paloaltonetworks.com</update-server>
+          <update-schedule>
+            <anti-virus>
+              <recurring>
+                <hourly>
+                  <action>download-and-install</action>
+                </hourly>
+              </recurring>
+            </anti-virus>
+            <threats>
+              <recurring>
+                <every-30-mins>
+                  <at>5</at>
+                  <action>download-and-install</action>
+                </every-30-mins>
+              </recurring>
+            </threats>
+            <wildfire>
+              <recurring>
+                <every-15-mins>
+                  <at>10</at>
+                  <action>download-and-install</action>
+                </every-15-mins>
+              </recurring>
+            </wildfire>
+          </update-schedule>
+          <timezone>America/Phoenix</timezone>
+          <service>
+            <disable-telnet>yes</disable-telnet>
+            <disable-http>yes</disable-http>
+          </service>
+          <hostname>PaloAlto2</hostname>
+          <device-telemetry>
+            <device-health-performance>yes</device-health-performance>
+            <product-usage>yes</product-usage>
+            <threat-prevention>yes</threat-prevention>
+            <region>Americas</region>
+          </device-telemetry>
+          <ip-address>10.252.253.254</ip-address>
+          <netmask>255.255.255.0</netmask>
+          <default-gateway>10.252.253.1</default-gateway>
+          <dns-setting>
+            <servers>
+              <primary>4.2.2.2</primary>
+              <secondary>1.1.1.1</secondary>
+            </servers>
+          </dns-setting>
+          <ntp-servers>
+            <primary-ntp-server>
+              <ntp-server-address>time.google.com</ntp-server-address>
+              <authentication-type>
+                <none/>
+              </authentication-type>
+            </primary-ntp-server>
+          </ntp-servers>
+        </system>
+        <setting>
+          <config>
+            <rematch>yes</rematch>
+          </config>
+          <management>
+            <hostname-type-in-syslog>FQDN</hostname-type-in-syslog>
+            <idle-timeout>0</idle-timeout>
+            <api>
+              <key>
+                <certificate>selfsignedca</certificate>
+              </key>
+            </api>
+          </management>
+          <auto-mac-detect>yes</auto-mac-detect>
+        </setting>
+      </deviceconfig>
+      <vsys>
+        <entry name="vsys1">
+          <application/>
+          <application-group/>
+          <zone>
+            <entry name="L3-Trust">
+              <network>
+                <layer3>
+                  <member>ethernet1/1</member>
+                  <member>ethernet1/4</member>
+                </layer3>
+              </network>
+              <enable-user-identification>yes</enable-user-identification>
+            </entry>
+            <entry name="L3-Untrust">
+              <network>
+                <layer3>
+                  <member>ethernet1/3</member>
+                  <member>ethernet1/8</member>
+                </layer3>
+              </network>
+            </entry>
+          </zone>
+          <service/>
+          <service-group/>
+          <schedule/>
+          <rulebase>
+            <default-security-rules>
+              <rules>
+                <entry name="interzone-default" uuid="483ee57e-c298-49ef-a0f9-3288da516696">
+                  <action>allow</action>
+                  <log-start>no</log-start>
+                  <log-end>yes</log-end>
+                </entry>
+                <entry name="intrazone-default" uuid="a482d251-6752-497c-b475-ed94b31f578f">
+                  <action>allow</action>
+                  <log-start>no</log-start>
+                  <log-end>yes</log-end>
+                </entry>
+              </rules>
+            </default-security-rules>
+            <nat>
+              <rules>
+                <entry name="Outbound NAT" uuid="0fbb57ed-abbc-42d1-81c7-fb018a7d4744">
+                  <source-translation>
+                    <dynamic-ip-and-port>
+                      <interface-address>
+                        <ip>161.129.81.52/28</ip>
+                        <interface>ethernet1/3</interface>
+                      </interface-address>
+                    </dynamic-ip-and-port>
+                  </source-translation>
+                  <to>
+                    <member>L3-Untrust</member>
+                  </to>
+                  <from>
+                    <member>L3-Trust</member>
+                  </from>
+                  <source>
+                    <member>any</member>
+                  </source>
+                  <destination>
+                    <member>any</member>
+                  </destination>
+                  <service>any</service>
+                  <to-interface>ethernet1/3</to-interface>
+                </entry>
+              </rules>
+            </nat>
+          </rulebase>
+          <import>
+            <network>
+              <interface>
+                <member>ethernet1/1</member>
+                <member>ethernet1/3</member>
+                <member>ethernet1/4</member>
+                <member>ethernet1/8</member>
+              </interface>
+            </network>
+          </import>
+        </entry>
+      </vsys>
+    </entry>
+  </devices>
+</config>
