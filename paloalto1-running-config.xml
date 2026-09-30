@@ -171,7 +171,7 @@ vWo7Pit5GGi9THuUyd7YyFVJt+ns
                   <enable>no</enable>
                 </lldp>
                 <ip>
-                  <entry name="100.64.0.25/24"/>
+                  <entry name="100.127.0.6/30"/>
                 </ip>
               </layer3>
             </entry>
@@ -199,6 +199,17 @@ vWo7Pit5GGi9THuUyd7YyFVJt+ns
               <comment>NXOS e1/3</comment>
             </entry>
           </ethernet>
+          <tunnel>
+            <units>
+              <entry name="tunnel.1111">
+                <ip>
+                  <entry name="10.123.24.34/30"/>
+                </ip>
+                <interface-management-profile>PING</interface-management-profile>
+                <comment>1111-DR peer tunnel.2</comment>
+              </entry>
+            </units>
+          </tunnel>
         </interface>
         <profiles>
           <monitor-profile>
@@ -331,6 +342,48 @@ vWo7Pit5GGi9THuUyd7YyFVJt+ns
               </entry>
             </global-protect-app-crypto-profiles>
           </crypto-profiles>
+          <gateway>
+            <entry name="gw-1111-dr">
+              <authentication>
+                <pre-shared-key>
+                  <key>-AQ==jLIjfQZ5yojbZGTqxg2pY0VROWQ=3SihRzk5FtJ97N/sveEcEQ==</key>
+                </pre-shared-key>
+              </authentication>
+              <protocol>
+                <ikev2>
+                  <pq-ppk>
+                    <enabled>no</enabled>
+                    <negotiation-mode>preferred</negotiation-mode>
+                  </pq-ppk>
+                  <dpd>
+                    <enable>yes</enable>
+                  </dpd>
+                  <ike-crypto-profile>Suite-B-GCM-256</ike-crypto-profile>
+                </ikev2>
+                <ikev1>
+                  <dpd>
+                    <enable>yes</enable>
+                  </dpd>
+                </ikev1>
+                <version>ikev2</version>
+              </protocol>
+              <local-address>
+                <ip>100.127.0.6/30</ip>
+                <interface>ethernet1/1</interface>
+              </local-address>
+              <protocol-common>
+                <nat-traversal>
+                  <enable>no</enable>
+                </nat-traversal>
+                <fragmentation>
+                  <enable>no</enable>
+                </fragmentation>
+              </protocol-common>
+              <peer-address>
+                <ip>161.129.81.52</ip>
+              </peer-address>
+            </entry>
+          </gateway>
         </ike>
         <qos>
           <profile>
@@ -447,13 +500,14 @@ vWo7Pit5GGi9THuUyd7YyFVJt+ns
             <interface>
               <member>ethernet1/1</member>
               <member>ethernet1/2</member>
+              <member>tunnel.1111</member>
             </interface>
             <routing-table>
               <ip>
                 <static-route>
                   <entry name="public default">
                     <nexthop>
-                      <ip-address>100.64.0.1</ip-address>
+                      <ip-address>100.127.0.5</ip-address>
                     </nexthop>
                     <bfd>
                       <profile>None</profile>
@@ -470,6 +524,24 @@ vWo7Pit5GGi9THuUyd7YyFVJt+ns
             </routing-table>
           </entry>
         </virtual-router>
+        <tunnel>
+          <ipsec>
+            <entry name="AZFOODS_DR-1111">
+              <auto-key>
+                <ike-gateway>
+                  <entry name="gw-1111-dr"/>
+                </ike-gateway>
+                <ipsec-crypto-profile>Suite-B-GCM-256</ipsec-crypto-profile>
+              </auto-key>
+              <tunnel-monitor>
+                <enable>yes</enable>
+                <destination-ip>10.123.24.33</destination-ip>
+              </tunnel-monitor>
+              <tunnel-interface>tunnel.1111</tunnel-interface>
+              <comment>peer tunnel.2</comment>
+            </entry>
+          </ipsec>
+        </tunnel>
       </network>
       <deviceconfig>
         <system>
@@ -532,6 +604,14 @@ vWo7Pit5GGi9THuUyd7YyFVJt+ns
               </network>
               <enable-user-identification>yes</enable-user-identification>
             </entry>
+            <entry name="SITE-TO-SITE">
+              <network>
+                <layer3>
+                  <member>tunnel.1111</member>
+                </layer3>
+              </network>
+              <enable-user-identification>yes</enable-user-identification>
+            </entry>
           </zone>
           <service/>
           <service-group/>
@@ -584,6 +664,7 @@ vWo7Pit5GGi9THuUyd7YyFVJt+ns
               <interface>
                 <member>ethernet1/1</member>
                 <member>ethernet1/2</member>
+                <member>tunnel.1111</member>
               </interface>
             </network>
           </import>
