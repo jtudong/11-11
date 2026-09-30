@@ -1,13 +1,11 @@
-=~=~=~=~=~=~=~=~=~=~=~= KiTTY log 2026.09.29 14:36:40 =~=~=~=~=~=~=~=~=~=~=~=
-
-peer#term len 0
-peer#sh run
+=~=~=~=~=~=~=~=~=~=~=~= KiTTY log 2026.09.30 16:14:00 =~=~=~=~=~=~=~=~=~=~=~=
+sh run
 Building configuration...
 
-Current configuration : 1677 bytes
+Current configuration : 1800 bytes
 !
-! Last configuration change at 14:20:34 MST Tue Sep 29 2026
-! NVRAM config last updated at 14:21:03 MST Tue Sep 29 2026
+! Last configuration change at 16:08:33 MST Wed Sep 30 2026
+! NVRAM config last updated at 16:08:39 MST Wed Sep 30 2026
 !
 version 15.7
 service timestamps debug datetime msec
@@ -87,7 +85,7 @@ ip tcp synwait-time 5
 !
 !
 interface Ethernet0/0
- ip address dhcp
+ ip address 100.64.0.26 255.255.255.0
  ip nat outside
  ip virtual-reassembly in
  duplex auto
@@ -99,7 +97,9 @@ interface Ethernet0/1
  duplex auto
 !
 interface Ethernet0/2
- no ip address
+ ip address 100.127.0.5 255.255.255.252
+ ip nat inside
+ ip virtual-reassembly in
  duplex auto
 !
 interface Ethernet0/3
@@ -118,6 +118,7 @@ ip forward-protocol nd
 no ip http server
 no ip http secure-server
 ip nat inside source list 10 interface Ethernet0/0 overload
+ip route 0.0.0.0 0.0.0.0 100.64.0.1
 !
 ipv6 ioam timestamp
 !
