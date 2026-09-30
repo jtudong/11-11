@@ -247,6 +247,17 @@ lRIvNwwDX1T1ksIcTCuhEoMx2ZTZ
               </layer3>
             </entry>
           </ethernet>
+          <tunnel>
+            <units>
+              <entry name="tunnel.2">
+                <ip>
+                  <entry name="10.123.24.33/30"/>
+                </ip>
+                <interface-management-profile>Inside-Trust</interface-management-profile>
+                <comment>AZFOODS-DC peer tunnel.1111</comment>
+              </entry>
+            </units>
+          </tunnel>
         </interface>
         <profiles>
           <monitor-profile>
@@ -372,6 +383,48 @@ lRIvNwwDX1T1ksIcTCuhEoMx2ZTZ
               </entry>
             </global-protect-app-crypto-profiles>
           </crypto-profiles>
+          <gateway>
+            <entry name="ike-gw-111-dr">
+              <authentication>
+                <pre-shared-key>
+                  <key>-AQ==jLIjfQZ5yojbZGTqxg2pY0VROWQ=3SihRzk5FtJ97N/sveEcEQ==</key>
+                </pre-shared-key>
+              </authentication>
+              <protocol>
+                <ikev2>
+                  <pq-ppk>
+                    <enabled>no</enabled>
+                    <negotiation-mode>preferred</negotiation-mode>
+                  </pq-ppk>
+                  <dpd>
+                    <enable>yes</enable>
+                  </dpd>
+                  <ike-crypto-profile>Suite-B-GCM-256</ike-crypto-profile>
+                </ikev2>
+                <ikev1>
+                  <dpd>
+                    <enable>yes</enable>
+                  </dpd>
+                </ikev1>
+                <version>ikev2</version>
+              </protocol>
+              <local-address>
+                <ip>161.129.81.52/28</ip>
+                <interface>ethernet1/3</interface>
+              </local-address>
+              <protocol-common>
+                <nat-traversal>
+                  <enable>no</enable>
+                </nat-traversal>
+                <fragmentation>
+                  <enable>no</enable>
+                </fragmentation>
+              </protocol-common>
+              <peer-address>
+                <ip>100.127.0.6</ip>
+              </peer-address>
+            </entry>
+          </gateway>
         </ike>
         <qos>
           <profile>
@@ -439,6 +492,7 @@ lRIvNwwDX1T1ksIcTCuhEoMx2ZTZ
               <member>ethernet1/1</member>
               <member>ethernet1/3</member>
               <member>ethernet1/4</member>
+              <member>tunnel.2</member>
             </interface>
             <routing-table>
               <ip>
@@ -547,6 +601,24 @@ lRIvNwwDX1T1ksIcTCuhEoMx2ZTZ
             </interface>
           </entry>
         </virtual-router>
+        <tunnel>
+          <ipsec>
+            <entry name="DR1111_to_AZFoodsDC_tu2">
+              <auto-key>
+                <ike-gateway>
+                  <entry name="ike-gw-111-dr"/>
+                </ike-gateway>
+                <ipsec-crypto-profile>Suite-B-GCM-256</ipsec-crypto-profile>
+              </auto-key>
+              <tunnel-monitor>
+                <enable>yes</enable>
+                <destination-ip>10.123.24.34</destination-ip>
+              </tunnel-monitor>
+              <tunnel-interface>tunnel.2</tunnel-interface>
+              <comment>tunnel.1111</comment>
+            </entry>
+          </ipsec>
+        </tunnel>
       </network>
       <deviceconfig>
         <system>
@@ -647,6 +719,14 @@ lRIvNwwDX1T1ksIcTCuhEoMx2ZTZ
                 </layer3>
               </network>
             </entry>
+            <entry name="SITE-TO-SITE">
+              <network>
+                <layer3>
+                  <member>tunnel.2</member>
+                </layer3>
+              </network>
+              <enable-user-identification>yes</enable-user-identification>
+            </entry>
           </zone>
           <service/>
           <service-group/>
@@ -702,6 +782,7 @@ lRIvNwwDX1T1ksIcTCuhEoMx2ZTZ
                 <member>ethernet1/3</member>
                 <member>ethernet1/4</member>
                 <member>ethernet1/8</member>
+                <member>tunnel.2</member>
               </interface>
             </network>
           </import>

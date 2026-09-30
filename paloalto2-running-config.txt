@@ -1,5 +1,5 @@
-=~=~=~=~=~=~=~=~=~=~=~= KiTTY log 2026.09.29 15:07:44 =~=~=~=~=~=~=~=~=~=~=~=
-lab@PaloAlto2# show
+=~=~=~=~=~=~=~=~=~=~=~= KiTTY log 2026.09.30 14:24:53 =~=~=~=~=~=~=~=~=~=~=~=
+show
 set deviceconfig system type static 
 set deviceconfig system update-server updates.paloaltonetworks.com
 set deviceconfig system update-schedule anti-virus recurring hourly action download-and-install
@@ -62,6 +62,9 @@ set network interface ethernet ethernet1/8 layer3 sdwan-link-settings ipv6-enabl
 set network interface ethernet ethernet1/8 layer3 dhcp-client send-hostname enable yes
 set network interface ethernet ethernet1/8 layer3 interface-management-profile Outside-MGMT
 set network interface ethernet ethernet1/8 layer3 lldp enable no
+set network interface tunnel units tunnel.2 ip 10.123.24.33/30 
+set network interface tunnel units tunnel.2 interface-management-profile Inside-Trust
+set network interface tunnel units tunnel.2 comment "AZFOODS-DC peer tunnel.1111"
 set network profiles monitor-profile default interval 3
 set network profiles monitor-profile default threshold 5
 set network profiles monitor-profile default action wait-recover
@@ -97,6 +100,18 @@ set network ike crypto-profiles ipsec-crypto-profiles Suite-B-GCM-256 dh-group g
 set network ike crypto-profiles ipsec-crypto-profiles Suite-B-GCM-256 lifetime hours 1
 set network ike crypto-profiles global-protect-app-crypto-profiles default encryption aes-128-cbc
 set network ike crypto-profiles global-protect-app-crypto-profiles default authentication sha1
+set network ike gateway ike-gw-111-dr authentication pre-shared-key key -AQ==jLIjfQZ5yojbZGTqxg2pY0VROWQ=3SihRzk5FtJ97N/sveEcEQ==
+set network ike gateway ike-gw-111-dr protocol ikev2 pq-ppk enabled no
+set network ike gateway ike-gw-111-dr protocol ikev2 pq-ppk negotiation-mode preferred
+set network ike gateway ike-gw-111-dr protocol ikev2 dpd enable yes
+set network ike gateway ike-gw-111-dr protocol ikev2 ike-crypto-profile Suite-B-GCM-256
+set network ike gateway ike-gw-111-dr protocol ikev1 dpd enable yes
+set network ike gateway ike-gw-111-dr protocol version ikev2
+set network ike gateway ike-gw-111-dr local-address ip 161.129.81.52/28
+set network ike gateway ike-gw-111-dr local-address interface ethernet1/3
+set network ike gateway ike-gw-111-dr protocol-common nat-traversal enable no
+set network ike gateway ike-gw-111-dr protocol-common fragmentation enable no
+set network ike gateway ike-gw-111-dr peer-address ip 100.127.0.6
 set network qos profile default class-bandwidth-type mbps class class1 priority real-time
 set network qos profile default class-bandwidth-type mbps class class2 priority high
 set network qos profile default class-bandwidth-type mbps class class3 priority high
@@ -111,7 +126,7 @@ set network virtual-router L3-Routes protocol bgp enable no
 set network virtual-router L3-Routes protocol rip enable no
 set network virtual-router L3-Routes protocol ospf enable no
 set network virtual-router L3-Routes protocol ospfv3 enable no
-set network virtual-router L3-Routes interface [ ethernet1/1 ethernet1/3 ethernet1/4 ]
+set network virtual-router L3-Routes interface [ ethernet1/1 ethernet1/3 ethernet1/4 tunnel.2 ]
 set network virtual-router L3-Routes routing-table ip static-route replication_network nexthop ip-address 10.252.255.10
 set network virtual-router L3-Routes routing-table ip static-route replication_network bfd profile None
 set network virtual-router L3-Routes routing-table ip static-route replication_network interface ethernet1/4
@@ -151,6 +166,12 @@ set network virtual-router mgmt protocol rip enable no
 set network virtual-router mgmt protocol ospf enable no
 set network virtual-router mgmt protocol ospfv3 enable no
 set network virtual-router mgmt interface ethernet1/8
+set network tunnel ipsec DR1111_to_AZFoodsDC_tu2 auto-key ike-gateway ike-gw-111-dr 
+set network tunnel ipsec DR1111_to_AZFoodsDC_tu2 auto-key ipsec-crypto-profile Suite-B-GCM-256
+set network tunnel ipsec DR1111_to_AZFoodsDC_tu2 tunnel-monitor enable yes
+set network tunnel ipsec DR1111_to_AZFoodsDC_tu2 tunnel-monitor destination-ip 10.123.24.34
+set network tunnel ipsec DR1111_to_AZFoodsDC_tu2 tunnel-interface tunnel.2
+set network tunnel ipsec DR1111_to_AZFoodsDC_tu2 comment tunnel.1111
 set shared application 
 set shared application-group 
 set shared service 
@@ -222,6 +243,8 @@ set shared certificate-profile
 set zone L3-Trust network layer3 [ ethernet1/1 ethernet1/4 ]
 set zone L3-Trust enable-user-identification yes
 set zone L3-Untrust network layer3 [ ethernet1/3 ethernet1/8 ]
+set zone SITE-TO-SITE network layer3 tunnel.2
+set zone SITE-TO-SITE enable-user-identification yes
 set service-group 
 set service 
 set schedule 
@@ -239,7 +262,7 @@ set rulebase nat rules "Outbound NAT" source any
 set rulebase nat rules "Outbound NAT" destination any
 set rulebase nat rules "Outbound NAT" service any
 set rulebase nat rules "Outbound NAT" to-interface ethernet1/3
-set import network interface [ ethernet1/1 ethernet1/3 ethernet1/4 ethernet1/8 ]
+set import network interface [ ethernet1/1 ethernet1/3 ethernet1/4 ethernet1/8 tunnel.2 ]
 set application-group 
 set application 
 set mgt-config users admin phash $5$wpqrngon$bkDHWlbIrlMhvhSd4NQpD3cEQmrKVsKuAW9ojFef587
